@@ -2,3 +2,57 @@
 
 ------------------------------------------------------------------------------------------------------------------------
 http://pastebin.com/uyifxgPu
+
+・Metasploit導入
+　　　sudo add-apt-repository ppa:openjdk-r/ppa
+　　　sudo apt-get update
+　　　sudo apt-get install openjdk-8-jre
+
+　　　sudo apt-get install build-essential subversion libreadline-dev libssl-dev libpq5 libpq-dev libreadline5 libsqlite3-dev libpcap-dev git-core autoconf postgresql pgadmin3 curl zlib1g-dev libxml2-dev libxslt1-dev vncviewer libyaml-dev curl zlib1g-dev
+
+　　　cd ~
+　　　git clone git://github.com/sstephenson/rbenv.git .rbenv
+　　　echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+　　　echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+　　　exec $SHELL
+　　　git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+　　　echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+　　　git clone git://github.com/dcarley/rbenv-sudo.git ~/.rbenv/plugins/rbenv-sudo
+　　　exec $SHELL
+　　　rbenv install 2.3.1
+　　　rbenv global 2.3.1
+　　　ruby -v
+
+　　　sudo -s
+　　　su postgres
+
+　　　createuser msf -P -S -R -D
+　　　(password)
+　　　(password)
+　　　createdb -O msf msf
+　　　exit
+　　　exit
+
+　　　cd /opt/
+　　　sudo git clone https://github.com/rapid7/metasploit-framework.git
+　　　sudo chown -R `whoami` /opt/metasploit-framework
+　　　cd metasploit-framework
+　　　gem install bundler
+　　　bundle install
+　　　sudo bash -c 'for MSF in $(ls msf*); do ln -s /opt/metasploit-framework/$MSF /usr/local/bin/$MSF;done'
+
+　　　sudo gedit /opt/metasploit-framework/config/database.yml
+
+　　　production:
+　　　 adapter: postgresql
+　　　 database: msf
+　　　 username: msf
+　　　 password: (さっきのパスワード)
+　　　 host: 127.0.0.1
+　　　 port: 5432
+　　　 pool: 75
+　　　 timeout: 5
+
+　　　sudo sh -c "echo export MSF_DATABASE_CONFIG=/opt/metasploit-framework/config/database.yml >> /etc/profile"
+　　　source /etc/profile
+
