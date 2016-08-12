@@ -1,0 +1,15 @@
+【vmware_tools_install】
+
+(Player > VMware Toolsのインストール)
+cd /media/"VMware Tools"
+cp VMwareTools-9.6.5-2700074.tar.gz /tmp
+cd /tmp
+tar zxvf ./VMwareTools-9.6.5-2700074.tar.gz
+cd ./vmware-tools-distrib/
+./vmware-install.pl
+
+[Enter][Enter][Enter]...
+
+service vmware-tools status
+
+shutdown -r now
